@@ -124,7 +124,7 @@ function addTicket(){
     spotsData.push(ticket);
     //把篩選改為全部地區
     regionSearch.value ==="全部地區";
-    //將新增套票表單重置
+    //將新增套票表單重置 (ghpage沒有成功再試一次)
     addTicketForm.reset();
     //以新的spotsData資料渲染網頁
     init(spotsData);
