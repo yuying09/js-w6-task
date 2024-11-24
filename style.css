@@ -1,0 +1,116 @@
+html, body {
+    line-height: 1.5;
+  }
+  
+  .add-ticket-box{
+    padding: 60px 95px;
+    max-width: 920px;
+    color: #00807E;
+    margin: 0 auto;
+    box-shadow: 0px 3px 6px #00000029;
+    margin-bottom: 100px;
+  }
+
+  .add-ticket-btn{
+    width: 160px;
+    height: 48px;
+    background: #00807E;
+    color: #FFFFFF;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+  }
+  .add-ticket-btn:hover{
+    background: #64C3BF;
+  }
+  .title-border{
+    border-bottom: 3px solid #00807E;
+  }
+  form{
+    margin-top: 32px;
+  }
+  .col-form-label{
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  .add-ticket-form input,
+  .add-ticket-form textarea,
+  .add-ticket-form select{
+    width: 100%;
+    background: #f7f7f7;
+    border: none;
+    text-indent:0.5rem ;
+    border-bottom:1px solid #00807E;
+    color: #818A91;
+    margin-bottom: 16px;
+  }
+  
+
+  .bottom-section{
+    background-color: #F7F7F7;
+    padding-top: 56px;
+  }
+  
+  .sight-region-select{
+    background: #FFFFFF;
+    border: #CED4DA 1px solid;
+    color: #818A91;
+  }
+  .card-section{
+    padding-top: 52px;
+  }
+  
+  .card{
+    height: 100%;
+    max-width: 350px;
+}
+  .card-img-top{
+    height: 180px;
+  }
+  .card-title{
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 9px;
+  }
+  
+  .card-title-border{
+    border-bottom: 2px solid #007572;
+  }
+  
+  .card-text{
+    color: #818A91;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    overflow: hidden;
+  }
+  
+  .region-tag,.rank-tag{
+    border-radius: 0 5px 5px 0px;
+    color: #FFF;
+    text-align: center;
+  }
+  
+  .region-tag{
+    padding-top: 10px;
+    width: 80px;
+    height: 44px;
+    background: #64C3BF;
+    transform: translate(0, -10px); 
+  }
+  .rank-tag{
+    padding-top: 5px;
+    width: 39px;
+    height: 32px;
+    background: #00807E;
+    transform: translate(0, -20px); 
+  }
+  
+  .last-num,.price{
+    color: #00807E;
+  }
+
+  .mb-38{
+    margin-bottom: 38px;
+  }

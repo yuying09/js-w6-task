@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>index</title>
+    <!-- bootstrap icon -->
+<!-- 使用 UNPKG 提供的 Bootstrap Icons CDN -->
+<link href="https://unpkg.com/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <!-- 我自己的css -->
+  <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <!-- 新增套票區 -->
+    <div class="container-fluid">
+      <section class="add-ticket-box">
+      <div class="row">
+        <div class="col">
+          <img src="./images/main_img.png" alt="main_img" style="width: 350px; height: 250px; margin-bottom: 21px;">
+          <img src="./images/logo.png" alt="logo" style="width: 350px; height: 235px;">
+        </div>
+        <div class="col">
+          <div class="d-flex title-border">
+            <i class="bi bi-plus-circle align-self-center" style="font-size: 20px; margin-right: 6px;"></i>        
+            <h2 class="fw-bold" style="font-size: 24px;">新增旅遊套票</h2>
+          </div>
+          <form class="add-ticket-form-list">
+            <div class="row add-ticket-form">
+              <label for="ticketName"  class="col-4 col-form-label ">套票名稱</label>
+              <div class="col-8"><input name="套票名稱" type="text" id="ticketName" placeholder="請填寫套票名稱" class="col-form-input"></div>
+            </div>
+            <div class="row add-ticket-form">
+              <label for="imgSrc" class="col-4 col-form-label ">圖片網址</label>
+              <div class="col-8"><input name="圖片網址" type="text" id="imgSrc" placeholder="請填寫圖片網址" class="col-form-input"></div>
+            </div>
+            <div class="row add-ticket-form">
+              <label for="spotsRegion" class="col-4 col-form-label ">景點地區</label>
+              <div class="col-8"><select name="景點地區" id="spotsRegion"  class="col-form-input" >
+                <option value="" disabled selected hidden>請選擇景點地區</option>
+                <option value="台北">台北</option>
+                <option value="台中">台中</option>
+                <option value="高雄">高雄</option>
+              </select></div>
+            </div>
+            <div class="row add-ticket-form">
+              <label for="ticketCost" class="col-4 col-form-label ">套票金額</label>
+              <div class="col-8"><input name="套票金額" type="number" id="ticketCost" placeholder="請填寫套票金額" class="col-form-input" min="1000" step="500"></div>
+            </div>
+            <div class="row add-ticket-form">
+              <label for="ticketGroup" class="col-4 col-form-label ">套票組數</label>
+              <div class="col-8"><input name="套票組數" type="number" id="ticketGroup" placeholder="請填寫套票組數" class="col-form-input" min="1"></div>
+            </div>
+            <div class="row add-ticket-form">
+              <label for="ticketRank" class="col-4 col-form-label ">套票星級</label>
+              <div class="col-8"><input type="number" id="ticketRank" placeholder="請填寫套票星級" class="col-form-input" min="1" max="10"></div>
+            </div>
+            <div class="row add-ticket-form">
+              <label for="ticketDesc" class="col-4 col-form-label ">套票名稱</label>
+              <div class="col-8"><textarea name="套票名稱" id="ticketDesc" placeholder="請填寫套票描述（限 100 字）"></textarea></div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <input class="btn add-ticket-btn fw-bold" type="button" value="新增套票">
+            </div>
+            
+          </form>
+      </div>
+      </div>
+    </section>
+  </div>
+  <!-- 篩選選單 -->
+  <section class="bottom-section">
+  <div class="container-fluid ticket-section">
+    <div class="d-flex ">
+      <select name="景點地區" id="spots-region"  class="spots-region-select" style="margin-right: 30px;">
+        <option value="地區搜尋" disabled selected hidden>地區搜尋</option>
+        <option value="全部地區">全部地區</option>
+        <option value="台北">台北</option>
+        <option value="台中">台中</option>
+        <option value="高雄">高雄</option>
+      </select>
+      <p style="color:#818A91; margin-bottom: 0px;" class="align-self-end search-num"></p>
+    </div>
+    
+    <!-- 卡片區域開始 -->
+    <section class="card-section">
+    <div class="container-fluid">
+    <div class="row card-row">
+    </div>
+  </div>
+    </section>
+
+
+    <!-- bootstrap icon -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <!-- axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <!-- 自己的js -->
+    <script src="./all.js"></script>
+  </body>
+</html>
