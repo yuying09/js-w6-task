@@ -1,19 +1,20 @@
 //使用axios取得資料
 
-let spotsData =[];
-const spotsDataUrl ="https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json";
+let spotsData = [];
+const spotsDataUrl = "https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json";
 
 axios.get(spotsDataUrl)
-    .then(function(response){
+    .then(function (response) {
         //console.log(response.data.data);
         spotsData = response.data.data;
         //console.log(spotsData);
         //重要!!!因為非同步，後續要用到這個資料的函式一定要寫在裡面!!!
         init(spotsData);
         // filterRegion();
-        })
-    .catch(function(error){
-        console.log(error.message); 
+        formatData()
+    })
+    .catch(function (error) {
+        console.log(error.message);
     });
 
 //資料取得完成
@@ -21,7 +22,6 @@ axios.get(spotsDataUrl)
 //渲染畫面 程式碼開始
 const cardRow = document.querySelector(".card-row");
 const searchNum = document.querySelector(".search-num");
-let cardTemplate = " ";
 
 //確認有抓到資料
 // console.log(cardRow);
@@ -29,10 +29,11 @@ let cardTemplate = " ";
 // console.log(cardTemplate);
 
 //渲染畫面的函式
-function init(spotsData){ 
+function init(spotsData) {
+    let cardTemplate = " ";
     //console.log(spotsData);
     //使用forEach功能將資料帶入
-    spotsData.forEach(function(item){
+    spotsData.forEach(function (item) {
         cardTemplate += `<div class="col-4 mb-38" >
         <div class="card" >
             <div class="position-relative">
@@ -58,7 +59,7 @@ function init(spotsData){
         </div>`;
     })
     cardRow.innerHTML = cardTemplate;
-    searchNum.textContent =`本次搜尋共顯示${spotsData.length}筆資料`;
+    searchNum.textContent = `本次搜尋共顯示${spotsData.length}筆資料`;
 }
 //渲染畫面 程式碼結束
 
@@ -69,65 +70,114 @@ const regionSearch = document.querySelector(".spots-region-select");
 //篩選功能函式
 function filterRegion() {
     let filterResult = [];
-    spotsData.forEach(function(item){
+    spotsData.forEach(function (item) {
         //console.log(item);
-        if(item.area===regionSearch.value){
+        if (item.area === regionSearch.value) {
             filterResult.push(item);
-        }else if(regionSearch.value==="全部地區"){
+        } else if (regionSearch.value === "全部地區") {
             filterResult.push(item);
         }
     })
     init(filterResult);
 };
 
-regionSearch.addEventListener("change",filterRegion);
+regionSearch.addEventListener("change", filterRegion);
 
-//篩選功能結束 (為何無法清除原有的資料?)
+//篩選功能結束 (為何無法清除原有的資料?=>因為把 let filterResult = []放到了函式外，移進函式後每次執行都做初始化就可以了)
 
 //新增套票功能開始
 
 //宣告各個表單內容
 const ticketName =
-document.querySelector("#ticketName");
+    document.querySelector("#ticketName");
 const imgSrc =
-document.querySelector("#imgSrc");
+    document.querySelector("#imgSrc");
 const spotsRegion =
-document.querySelector("#spotsRegion");
+    document.querySelector("#spotsRegion");
 const ticketCost =
-document.querySelector("#ticketCost");
-const ticketGroup  =
-document.querySelector("#ticketGroup");
+    document.querySelector("#ticketCost");
+const ticketGroup =
+    document.querySelector("#ticketGroup");
 const ticketRank =
-document.querySelector("#ticketRank");
+    document.querySelector("#ticketRank");
 const ticketDesc =
-document.querySelector("#ticketDesc");
+    document.querySelector("#ticketDesc");
 //宣告新增套票按鈕
 const addTicketBtn =
-document.querySelector(".add-ticket-btn");
+    document.querySelector(".add-ticket-btn");
 //宣告新增套票表單
 const addTicketForm =
-document.querySelector(".add-ticket-form-list");
+    document.querySelector(".add-ticket-form-list");
 
 //新增套票的函式
-function addTicket(){
-    let ticket ={
-            "id": spotsData.length,
-            "name": ticketName.value.trim(), //value是輸入的值 trim用來刪除字符串開頭和結尾的空白字符
-            "imgUrl":imgSrc.value.trim() ,
-            "area": spotsRegion.value.trim(),
-            "description": ticketDesc.value.trim(),
-            "group":Number( ticketGroup.value.trim()),
-            "price":Number( ticketCost.value.trim()),
-            "rate": Number(ticketRank.value.trim()),
+function addTicket() {
+    let ticket = {
+        "id": spotsData.length,
+        "name": ticketName.value.trim(), //value是輸入的值 trim用來刪除字符串開頭和結尾的空白字符
+        "imgUrl": imgSrc.value.trim(),
+        "area": spotsRegion.value.trim(),
+        "description": ticketDesc.value.trim(),
+        "group": Number(ticketGroup.value.trim()),
+        "price": Number(ticketCost.value.trim()),
+        "rate": Number(ticketRank.value.trim()),
     };
     //把新增的套票內容加進spotsData
+
     spotsData.push(ticket);
     //把篩選改為全部地區
-    regionSearch.value ==="全部地區";
+    regionSearch.value === "全部地區";
     //將新增套票表單重置 (ghpage沒有成功再試一次)
     addTicketForm.reset();
     //以新的spotsData資料渲染網頁
     init(spotsData);
+    //更新圖表
+    formatData();
 }
 
-addTicketBtn.addEventListener("click",addTicket);
+addTicketBtn.addEventListener("click", addTicket);
+
+//新增圖表
+function renderChart(data) {
+
+    var chart = c3.generate({
+        bindto: '#areaChart',
+        size: {
+            width: 160,
+            height: 160
+        },
+        data: {
+            columns: data,
+            type: 'donut',
+        },
+        donut: {
+            title: "套票地區比重",
+            width: 10,
+            label: {
+                show: false
+            }
+        },
+        color: {
+            pattern: ["#26C0C7", "#5151D3", "#E68618"]
+        },
+    });
+};
+
+//將資料改成C3要的格式
+function formatData() {
+    const obj = {};
+    spotsData.forEach(item => {
+        if (!(obj[item.area])) {
+            obj[item.area] = 1;
+        } else if (obj[item.area]) {
+            obj[item.area]++;
+        }
+    });
+    
+    //更改陣列順序
+    let array = Object.entries(obj);//Object.entries(obj)可將obj物件資料改成陣列形式
+    const ks = array.shift();//將高雄資料移置最後
+    array.push (ks);
+
+    renderChart(array)//以array陣列資料製作圖表
+
+};
